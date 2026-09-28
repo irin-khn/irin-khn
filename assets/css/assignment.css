@@ -2972,3 +2972,9 @@ input, select, textarea {
 	body.is-touch .poptrox-popup .closer {
 		opacity: 1.0 !important;
 	}
+/* My quick changes from the original templatae */
+.col-3 img,
+.col-6 img {
+    max-width: 100%;
+    height: auto;
+}
