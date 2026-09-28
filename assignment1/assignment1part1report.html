@@ -1,0 +1,1932 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Assignment 1 - Optimization</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <link rel="stylesheet" href="../assets/css/assignment.css">
+       
+    <!--The following code block enables Latex programming, which was taken 
+    from the 'Starter Template' at https://katex.org/docs/browser-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.css" integrity="sha384-JctiRyLzXCrSoOOzFlSoWLdyzQl7OrrRnhyeBmzB6ZWtcjccUyc8lCQJqIbs3uQX" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js" integrity="sha384-+7Keh381hSkXmXqnjC0JBM/kzsN6TFj+wMKychSLjTvJ8/0ElMde2uKl8i6p6Buj" crossorigin="anonymous"></script>
+
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <h1>Assignment 1: Optimization</h1>
+            <nav>
+                <a href="../index.html">Home</a>
+                <a href="../assignment1/assignment1part1report.html">Part 1 Report</a>
+                <a href="../assignment1/assignment1part1code.html">Part 1 Python Code</a>
+                <a href="../assignment1/assignment1part2report.html">Part 2 Report</a>
+                <a href="../assignment1/assignment1part2code.html">Part 2 Python Code</a>
+            </nav>
+        </div>
+        </header>
+
+    <!-- Main Content -->
+    <div id="main">
+
+        <!-- Overview -->
+        <section id="overview">
+            <h5>By Irina Khan, September 28, 2026</h5>
+            <header class="major">
+                <h2>Overview</h2>
+            </header>
+
+            <p>
+                This assignment investigates the shortest distance between
+                a point and a curve using analytical and numerical methods.
+            </p>
+            <h2> Table of Contents</h2>
+            <ul>
+                <li> <a href="#hand-solved-analytical">Handwritten Analytical Solutions </a></li>
+                <li> <a href="#hand-solved-NR">Handwritten Numerical Method: Newton-Raphson</a></li>
+                <li> <a href="#hand-solved-GS">Handwritten Numerical Method: Golden Search</a></li>
+                <li> <a href="#python-NR">Python Script Implementation of Newton-Raphson</a></li>
+                <ul>
+                    <li><a href="#python-NR-original">N-R Approximation of Quadratic Function</a></li>
+                    <li><a href="#python-NR-other-poly">N-R Approximation of Higher-Order Polynomial</a></li>
+                    <li><a href="#python-NR-exp">N-R Approximation of Exponential Function</a></li>
+                    <li><a href="#python-NR-log">N-R Approximation of Logarithmic Function</a></li>
+                    <li><a href="#python-NR-rat">N-R Approximation of Rational Function</a></li>
+                    <li><a href="#python-NR-root">N-R Approximation of Radical Root Function</a></li>
+                </ul>
+                <li> <a href="#python-GS">Python Script Implementation of Golden Section Search</a></li>
+                <ul>
+                    <li><a href="#python-GS-original">G-S Approximation of Quadratic Function</a></li>
+                    <li><a href="#python-GS-other-poly">G-S Approximation of Higher-Order Polynomial</a></li>
+                    <li><a href="#python-GS-exp">G-S Approximation of Exponential Function</a></li>
+                    <li><a href="#python-GS-log">G-S Approximation of Logarithmic Function</a></li>
+                    <li><a href="#python-GS-rat">G-S Approximation of Rational Function</a></li>
+                    <li><a href="#python-GS-root">G-S Approximation of Radical Root Function</a></li>
+                </ul>
+            </ul>
+        </section>
+
+        <!-- Handwritten Solutions -->
+        <section id="hand-solved-analytical">
+            <header class="major">
+                <h2>Hand-worked Solutions via Analytical Method</h2>
+            </header>
+
+            <p>
+                The following images are screenshots of my hand-solved solutions to the equation y = x^2 + 5
+                for the points of (0,0), (-4,0), (-8,0), (2,0), and (6,0).
+            </p>
+
+            <div style="text-align: center;">
+                <img src="../assignment1/Analytical_Handwritten_Steps1_2.png" width="70%" height="auto">
+                <img src="../assignment1/Analytical_Handwritten_Step3.png" width="80%" height="auto">
+                <img src="../assignment1/Analytical_Handwritten_Step4.png" width="80%" height="auto">
+            </div>
+
+        </section>
+        
+        <section id="hand-solved-NR">
+            <h2>Hand-worked Approximation via Newton-Raphson Method</h2>
+            <p>
+                The following images are screenshots of my handwritten iterations using the 
+                Newton-Raphson approximation method. 
+            </p>
+
+            <div style="text-align: center;">
+                <img src="../assignment1/NR_Handwritten_Setup.png" width="50%" height="auto">
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/NR_Handwritten_(0,0)_(-4,0).png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/NR_Handwritten_(-8,0)_(2,0).png" alt="...">
+                </div>
+            </div>
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-3">
+                    <img src="../assignment1/NR_Handwritten_(6,0).png" alt="...">
+                </div>
+            </div>
+        </section>
+
+        <section id="hand-solved-GS">
+            <h2>Hand-worked Approximation via Golden Search Method</h2>
+            <p>
+                The following images are screenshots of my handwritten iterations using the 
+                Golden Search approximation method. 
+            </p>
+
+            <div style="text-align: center;">
+                <img src="../assignment1/GS_Handwritten_Setup.png" width="50%" height="auto">
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/GS_Handwritten_(0,0)_(-4,0).png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/GS_Handwritten_(-8,0)_(2,0).png" alt="...">
+                </div>
+            </div>
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-3">
+                    <img src="../assignment1/GS_Handwritten_(6,0).png" alt="...">
+                </div>
+            </div>
+        </section>
+
+
+        <section id="python-NR">
+            <header class="major">
+                <h2 id="python-NR-original">Newton-Raphson Method as Python Script</h2>
+            </header>
+            <p>
+                The Newton-Raphson Method is a very fast and effective method, but it requires the first
+                and second derivatives of the function analyzed. For the function:    
+                    $$ y = x^2 + 5 $$
+
+                The first and second derivatives are:
+                    $$ \frac{dy}{dx} = 2x $$
+                    $$ \frac{d^2y}{dx^2} = 2 $$
+
+                For the Newton-Raphson Method, we still start with an initial guess of x0.
+                The equation for Newton-Raphson calculates the next guessed x-value with the following equation:
+
+                    $$ x_{n+1} = x_{n} + \frac{f'(x_{n})}{f''(x_{n})}  $$
+
+                The <a href="../assignment1/assignment1part1_N-R_Code.html">python script on the Assignment 1 Part 1 Code page </a> implements the 
+                Newton-Raphson Method, and includes a check which compares the difference in 
+                consecutive x-values to see if they are within an error tolerance of 1e-7.
+                <br> <br>
+                The following plots show the shortest distances between the quadratic equation above and several points, described in
+                the table below, with the value of the shortest calculated distance. The initial guesses were kept constant
+                across the test cases as x_initial = 5.
+                <br> <br>
+                In addition to the points requested by assignment 1 [(0,0), (-4,0), (-8,0), (2,0), and (6,0)], 4 more points were picked randomly
+                in each of the 4 quadrants to prove the program behaves as expected.
+
+            </p>
+
+            <!--Table of all of the points tested against the x^2+5 function-->
+            
+            <table>
+                <tr>
+                    <th>$$x_{0}, y_{0}$$</th>
+                    <th>Shortest Distance</th>
+                    <th>$$x_{final}$$</th>
+                    <th>Number of iterations</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(0, 0)</td>
+                    <td>5.00000</td>
+                    <td>3.06808e-11</td>
+                    <td>6</td>
+                </tr>
+                 <tr>
+                    <td style="text-align: center;">(-4, 0)</td>
+                    <td>6.28985</td>
+                    <td>-0.35547</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-8, 0)</td>
+                    <td>9.13342</td>
+                    <td>-0.67208</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(2, 0)</td>
+                    <td>5.35140</td>
+                    <td>0.18074</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(6, 0)</td>
+                    <td>7.60313</td>
+                    <td>0.51990</td>
+                    <td>7</td>
+                </tr>
+                <!--My points! :D-->
+                <tr>
+                    <td style="text-align: center;">(8.2, 5.7)</td>
+                    <td>6.85507</td>
+                    <td>1.64216</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(3.4, -2.4)</td>
+                    <td>8.09879</td>
+                    <td>0.21395</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-6.8, -4.1)</td>
+                    <td>11.25420</td>
+                    <td>-0.34971</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-5.3,12.9)</td>
+                    <td style="color: rgb(223, 56, 56);">7.97205</td>
+                    <td style="color: rgb(223, 56, 56);">2.51957</td>
+                    <td style="color: rgb(223, 56, 56);">6</td>
+                </tr>
+                </table>
+            
+                <p><br><br>
+                Below, the plots on the left show the intermediate guesses of the x-values. The dots are on a 
+                gradient from red to green, showing how the numerical method guesses new x-values that are closer and
+                closer to the actual correct solution. (The brightest green point on the plots)
+
+                <br><br>
+                The plots on the right show the final shortest distance between the point and the function.
+                </p>
+
+            <!-- Plots of code from Asignment 1 with the original function y = x^2 + 5!-->
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_IntermediateSteps_0_0.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_FinalPlot_0_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_IntermediateSteps_-4_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_FinalPlot_-4_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_IntermediateSteps_-8_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_FinalPlot_-8_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_IntermediateSteps_2_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_FinalPlot_2_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_IntermediateSteps_6_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_FinalPlot_6_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_IntermediateSteps_8.2_5.7.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_FinalPlot_8.2_5.7.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_IntermediateSteps_3.4_-2.4.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_FinalPlot_3.4_-2.4.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_IntermediateSteps_-6.8_-4.1.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_FinalPlot_-6.8_-4.1.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_IntermediateSteps_-5.3_12.9_Wrong.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_FinalPlot_-5.3_12.9_Wrong.png" alt="...">
+                </div>
+            </div>
+            <p><br>
+                Notice that in the last 2 plots, the 'shortest distance' calculated is 7.972, which is incorrect. 
+                For the point (-5.3, 12.9), 
+                the x-value on the function that would yield the shortest distance should occur on the left side of the 
+                x-y plane, where x values are negative. The Newton-Raphson approximation method failed to get the correct
+                'shortest distance' value because it was given an initial guess of x_initial = 5, which made the method
+                fall into a relative minima in the objective function.
+                <br><br>
+                When we feed an alternate initial guess of x_initial = -5, the Newton-Raphson method finds the correct absolute 
+                minima of the objective function, yielding a 'shortest distance' value of 2.45180. This occurs at x_final = -2.88423,
+                which was found after 5 iterations of the Newton-Raphson approximation method. The intermediate plot and final plot
+                can be seen below.
+                <br>
+            </p>
+
+            <div class="row plot-grid">
+                    <!-- left side of column-->
+                    <div class="col-6">
+                        <img src="../assignment1/Plot_IntermediateSteps_-5.3_12.9_New_Init_Guess.png" alt="...">
+                    </div>
+
+                <!--right side of colunm-->
+                    <div class="col-6">
+                        <img src="../assignment1/Plot_FinalSteps_-5.3_12.9_New_Init_Guess.png" alt="...">
+                    </div>
+            </div>
+
+            <br>
+            <header>
+                <h3 id="python-NR-other-poly">Newton-Raphson Method on Other Polynomial Equations</h3>
+            </header>
+
+            <p>
+            The following functions is another polynomial functions that I picked to show 
+            that the Newton-Raphson algorithm code is functioning correctly for higher order
+            polynomial equations. The points picked are 
+            from the assignment outline [(0,0), (-4,0), (-8,0), (2,0), and (6,0)] along
+            with the 4 additional points that I picked randomly from each of the 4 quadrants
+            of the x-y plane. 
+            <br>
+            For the fifth-order polynomial equation:
+                $$ y = x^5 - 2x + 2$$
+            The first derivative is:
+                $$ \frac{dy}{dx} = 5x^4 - 2$$
+            The second derivative is: 
+                $$ \frac{d^2y}{dx^2} = 20x^3 $$           
+            <br>
+            The following table and plots shows the shortest distance objective function applied to this polynomial function:
+            </p>
+            <br>
+
+            <table>
+                <tr>
+                    <th>$$x_{0}, y_{0}$$</th>
+                    <th>Initial Guess</th>
+                    <th>Shortest Distance</th>
+                    <th>$$x_{final}$$</th>
+                    <th>Number of iterations</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(0, 0)</td>
+                    <td>x = 5</td>
+                    <td>1.03868</td>
+                    <td>0.68750</td>
+                    <td>19</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-4, 0)</td>
+                    <td>x = -2</td>
+                    <td>2.63017</td>
+                    <td>-1.37503</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-8, 0)</td>
+                    <td>x = -2</td>
+                    <td>6.62262</td>
+                    <td>-1.38932</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(2, 0)</td>
+                    <td>x = 5</td>
+                    <td>1.35438</td>
+                    <td>0.90607</td>
+                    <td>18</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(6, 0)</td>
+                    <td>x = 5</td>
+                    <td>5.08780</td>
+                    <td>1.05338</td>
+                    <td>17</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(8.2, 5.7)</td>
+                    <td>x = 5</td>
+                    <td>6.73314</td>
+                    <td>1.47406</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(3.4, -2.4)</td>
+                    <td>x = 5</td>
+                    <td>4.04667</td>
+                    <td>0.86533</td>
+                    <td>17</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-6.8, -4.1)</td>
+                    <td>x = -2</td>
+                    <td>5.23730</td>
+                    <td>-1.56602</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-5.3, 12.9)</td>
+                    <td>x = 5</td>
+                    <td>10.62008</td>
+                    <td>-0.83777</td>
+                    <td>9</td>
+                </tr>
+            </table>
+            <br> <br>
+     
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_IntSteps_0_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_Final_0_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_IntSteps_-4_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_Final_-4_0.png" alt="...">
+                </div>
+            </div>
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_IntSteps_-8_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_Final_-8_0.png" alt="...">
+                </div>
+            </div>
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_IntSteps_2_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_Final_2_0.png" alt="...">
+                </div>
+            </div>
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_IntSteps_6_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_Final_6_0.png" alt="...">
+                </div>
+            </div>
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_IntSteps_8.2_5.7.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_Final_8.2_5.7.png" alt="...">
+                </div>
+            </div>
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_IntSteps_3.4_-2.4.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_Final_3.4_-2.4.png" alt="...">
+                </div>
+            </div>
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_IntSteps_-6.8_-4.1.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_Final_-6.8_-4.1.png" alt="...">
+                </div>
+            </div>
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_IntSteps_-5.3_12.9.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_PolyOne_Final_-5.3_12.9.png" alt="...">
+                </div>
+            </div>
+            <br>
+
+            <header>
+                <h3 id="python-NR-exp">Newton-Raphson Method on Exponential Function</h3>
+            </header>
+            
+            <p>
+            The following table and plots shows the shortest distance objective function applied to an exponential function:
+                $$ y = 1.2^x + 7 $$
+            The first derivative is:
+                $$ \frac{dy}{dx} = ln(1.2) \cdot 1.2^x$$
+            The second derivative is: 
+                $$ \frac{d^2y}{dx^2} = (ln(1.2))^2 \cdot 1.2^x $$           
+            <br>
+            For brevity, all of the following unique functions will only have up to 
+            five coordinates that will be plugged into the Newton-Raphson algorithm to yield distances.
+            <br><br>
+            The coordinates checked will be (2, 0), which is on the x-axis, and four coordinates spread
+            across the four quadrants of the x-y plane, which includes (8.2, 5.7), (3.4, -2.4), (-6.8, -4.1),
+            (-5.3, 12.9). 
+            <br><br> 
+            For this exponential function the initial guesses were set to x_initial = 5.
+            </p>
+
+            <table>
+                <tr>
+                    <th>$$x_{0}, y_{0}$$</th>
+                    <th>Initial Guess</th>
+                    <th>Shortest Distance</th>
+                    <th>$$x_{final}$$</th>
+                    <th>Number of iterations</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(2, 0)</td>
+                    <td>x = 5</td>
+                    <td>8.23262</td>
+                    <td>0.41224</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(8.2, 5.7)</td>
+                    <td>x = 5</td>
+                    <td>4.81656</td>
+                    <td>5.92215</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(3.4, -2.4)</td>
+                    <td>x = 5</td>
+                    <td>10.86810</td>
+                    <td>1.05488</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-6.8, -4.1)</td>
+                    <td>x = 5</td>
+                    <td>11.37513</td>
+                    <td>-7.34208</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-5.3, 12.9)</td>
+                    <td>x = 5</td>
+                    <td>5.50527</td>
+                    <td>-4.88956</td>
+                    <td>3</td>
+                </tr>
+            </table>
+            <br> <br>
+
+            <!-- Plots of code from Asignment 1 with the exponential function-->
+            
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_ExpFx_IntSteps_2_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_ExpFx_Final_2_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_ExpFx_IntSteps_8.2_5.7.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_ExpFx_Final_8.2_5.7.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_ExpFx_IntSteps_3.4_-2.4.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_ExpFx_Final_3.4_-2.4.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_ExpFx_IntSteps_-6.8_-4.1.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_ExpFx_Final_-6.8_-4.1.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_ExpFx_IntSteps_-5.3_12.9.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_ExpFx_Final_-5.3_12.9.png" alt="...">
+                </div>
+            </div>
+
+
+            <br>
+            <header>
+            <h3 id="python-NR-log">Newton-Raphson Method on Logarithmic Function</h3>
+            </header>
+
+            <p>
+            The following table and plots shows the shortest distance objective function applied to an logarithmic function:
+                $$ y = log_{3}(x) + 10 $$
+            The first derivative is:
+                $$ \frac{dy}{dx} = \frac{1}{x \cdot ln(3)}$$
+            The second derivative is: 
+                $$ \frac{d^2y}{dx^2} = \frac{1}{x^2 \cdot ln(3)} $$     
+            
+            <br>
+            For logarithmic equations, the domain of acceptable x inputs is 0 to infinity. Thus, the points
+            chosen ensure that x > 0. 
+            <br> <br>
+            This is because although the objective function is indeed capable of evaluating x values that are 
+            less than 0, the Newton-Raphson algorithm would require a step from its initial guess (a positive number) and evaluate the 
+            functions at a negative number, which is a special case that would need to be handled differently.
+            <br> <br>
+            For demonstrating profiency of the standard Newton-Raphson algorithm, all points that are fed to the 
+            algorithm require the x0 value to be greater than 0.             
+            
+            <br> <br>
+            For example, instead of plugging in the usual (0,0) coordinate to get the distance of the point from the function, I chose to plug in (2,0).
+            Out of the 4 quadrants tested, only the positive-x side and positive-y side of the x-y plane are tested (1 quadrant) with the set of coordinates 
+            of [8.2, 5.7].
+            </p>
+
+            <table>
+                <tr>
+                    <th>$$x_{0}, y_{0}$$</th>
+                    <th>Initial Guess</th>
+                    <th>Shortest Distance</th>
+                    <th>$$x_{final}$$</th>
+                    <th>Number of iterations</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(2, 0)</td>
+                    <td>x = 5</td>
+                    <td> 2.00000 </td>
+                    <td> 1.70327e-5</td>
+                    <td> 10 </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(8.2, 5.7)</td>
+                    <td>x = 5</td>
+                    <td> 6.17368 </td>
+                    <td> 7.45151</td>
+                    <td> 11</td>
+                </tr>
+            </table>
+            <br> <br>
+
+            <!-- Plots of code from Asignment 1 with the logarithmic function-->
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_LogFx_IntSteps_2_0.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_LogFx_Final_2_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_LogFx_IntSteps_8.2_5.7.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_LogFx_Final_8.2_5.7.png" alt="...">
+                </div>
+            </div>
+            <br>
+
+            <header>
+            <h3 id="python-NR-rat">Newton-Raphson Method on Rational Function</h3>
+            </header>
+
+            <p>
+            The following table and plots shows the shortest distance objective function applied to an rational function
+            where the variable x is found in the denominator:
+                $$ y = \frac{6}{x} $$
+            The first derivative is:
+                $$ \frac{dy}{dx} = \frac{-6}{x^2}$$
+            The second derivative is: 
+                $$ \frac{d^2y}{dx^2} = \frac{12}{x^3} $$     
+            
+            <br>
+            In this rational function, the domain of x includes all real numbers EXCEPT for x = 0. 
+            <br> <br>
+            Thus, the points chosen for this application of the Newton-Raphson algorithm does not include (0,0),
+            but rather (2,0), along with the standard set of 4 points that are scattered in all 4 quadrants of the x-y plane.
+            </p>
+
+            <table>
+                <tr>
+                    <th>$$x_{0}, y_{0}$$</th>
+                    <th>Initial Guess</th>
+                    <th>Shortest Distance</th>
+                    <th>$$x_{final}$$</th>
+                    <th>Number of iterations</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(2, 0)</td>
+                    <td>x = 5</td>
+                    <td> 2.22500 </td>
+                    <td> 3.15085</td>
+                    <td> 5 </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(8.2, 5.7)</td>
+                    <td>x = 5</td>
+                    <td> 4.94612 </td>
+                    <td> 7.70230</td>
+                    <td> 4 </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(3.4, -2.4)</td>
+                    <td>x = 5</td>
+                    <td> 3.89201 </td>
+                    <td> 4.50391</td>
+                    <td> 3 </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-6.8, -4.1)</td>
+                    <td>x = 5</td>
+                    <td> 3.18698 </td>
+                    <td> -6.32770</td>
+                    <td> 6 </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-5.3, 12.9)</td>
+                    <td>x = 5</td>
+                    <td> 13.86178 </td>
+                    <td> -6.98968</td>
+                    <td> 6 </td>
+                </tr>
+            </table> 
+            <br> <br>   
+            
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RatFx_IntSteps_2_0.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RatFx_Final_2_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RatFx_IntSteps_8.2_5.7.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RatFx_Final_8.2_5.7.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Pot_RatFx_IntSteps_3.4_-2.4.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RatFx_Final_3.4_-2.4.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RatFx_IntSteps_-6.8_-4.1.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RatFx_Final_-6.8_-4.1.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RatFx_IntSteps_-5.3_12.9.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RatFx_Final_-5.3_12.9.png" alt="...">
+                </div>
+            </div>
+            <br><br>
+
+            </header>
+            <h3 id="python-NR-root">Newton-Raphson Method on Radical Root Function</h3>
+            </header>
+
+            <p>
+            The following table and plots shows the shortest distance objective function applied to an logarithmic function:
+                $$ y = \sqrt[3]{x} $$
+            The first derivative is:
+                $$ \frac{dy}{dx} = \frac{1}{3 \cdot \sqrt[3]{x^2}}$$
+            The second derivative is: 
+                $$ \frac{d^2y}{dx^2} = \frac{-2}{9 \cdot \sqrt[3]{x^5}} $$     
+            
+            <br>
+            The domain of x values ranges from negative infinity to infinity, so any set of coordinate points 
+            may be fed into the Newton-Raphson code. In order to display a meaningful distance, the first
+            set of coordinate points will be (2, 0) instead of (0, 0), since (0, 0) is directly on the 
+            cubic equation.
+            </p>
+
+            <table>
+                <tr>
+                    <th>$$x_{0}, y_{0}$$</th>
+                    <th>Initial Guess</th>
+                    <th>Shortest Distance</th>
+                    <th>$$x_{final}$$</th>
+                    <th>Number of iterations</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(2, 0)</td>
+                    <td>x = 5</td>
+                    <td> 1.23043 </td>
+                    <td> 1.72189</td>
+                    <td> 3 </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(8.2, 5.7)</td>
+                    <td>x = 5</td>
+                    <td> 3.67144 </td>
+                    <td> 8.49306</td>
+                    <td> 3 </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(3.4, -2.4)</td>
+                    <td>x = 5</td>
+                    <td> 3.85619 </td>
+                    <td> 2.75517</td>
+                    <td> 3 </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-6.8, -4.1)</td>
+                    <td>x = 5</td>
+                    <td> 2.19619 </td>
+                    <td> -6.99924</td>
+                    <td> 3 </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-5.3, 12.9)</td>
+                    <td>x = 5</td>
+                    <td> 13.42247 </td>
+                    <td> 0.56788</td>
+                    <td> 5 </td>
+                </tr>
+            </table>
+            <br> <br>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RootFx_IntSteps_2_0.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RootFx_Final_2_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RootFx_IntSteps_8.2_5.7.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RootFx_Final_8.2_5.7.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RootFx_IntSteps_3.4_-2.4.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RootFx_Final_3.4_-2.4.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RootFx_IntSteps_-6.8_-4.1.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RootFx_Final_-6.8_-4.1.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RootFx_IntSteps_-5.3_12.9.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_RootFx_Final_-5.3_12.9.png" alt="...">
+                </div>
+            </div>
+            <br><br>
+        </section>
+
+        <section id="python-GS">
+            <header class="major">
+                <h2 id="python-GS-original">Golden Section Search as Python Script</h2>
+            </header>
+
+            <p>
+                This section presents the numerical approaches used
+                to solve the problem.
+            </p>
+
+            <!--Table of all of the points tested against the x^2+5 function-->
+            <table>
+                <tr>
+                    <th>$$x_{0}, y_{0}$$</th>
+                    <th>Initial Interval [a,b]</th>
+                    <th>Shortest Distance</th>
+                    <th>$$x_{final}$$</th>
+                    <th>Number of changes in interval</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(0, 0)</td>
+                    <td>[-5, 10]</td>
+                    <td>5.00000</td>
+                    <td>1.09253e-8</td>
+                    <td>41</td>
+                </tr>
+                 <tr>
+                    <td style="text-align: center;">(-4, 0)</td>
+                    <td>[-5, 10]</td>
+                    <td>6.28985</td>
+                    <td>-0.35547</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-8, 0)</td>
+                    <td>[-5, 10]</td>
+                    <td>9.13342</td>
+                    <td>-0.67208</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(2, 0)</td>
+                    <td>[-5, 10]</td>
+                    <td>5.35140</td>
+                    <td>0.18074</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(6, 0)</td>
+                    <td>[-5, 10]</td>
+                    <td>7.60313</td>
+                    <td>0.51990</td>
+                    <td>41</td>
+                </tr>
+                <!--My points! :D-->
+                <tr>
+                    <td style="text-align: center;">(8.2, 5.7)</td>
+                    <td>[-5, 10]</td>
+                    <td>6.85507</td>
+                    <td>1.64216</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(3.4, -2.4)</td>
+                    <td>[-5, 10]</td>
+                    <td>8.09879</td>
+                    <td>0.21395</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-6.8, -4.1)</td>
+                    <td>[-5, 10]</td>
+                    <td>11.25420</td>
+                    <td>-0.34971</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-5.3,12.9)</td>
+                    <td>[-5, 10]</td>
+                    <td>2.45180</td>
+                    <td>-2.88423</td>
+                    <td>41</td>
+                </tr>
+                </table>
+
+            <br>
+            <!-- Plots of code from Asignment 1 with the original function y = x^2 + 5!-->
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_IntSteps_0_0.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Final_0_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_IntSteps_-4_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Final_-4_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_IntSteps_-8_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Final_-8_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_IntSteps_2_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Final_2_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_IntSteps_6_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Final_6_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_IntSteps_8.2_5.7.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Final_8.2_5.7.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_IntSteps_3.4_-2.4.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Final_3.4_-2.4.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_IntSteps_-6.8_-4.1.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Final_-6.8_-4.1.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_IntSteps_-5.3_12.9.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Final_-5.3_12.9.png" alt="...">
+                </div>
+            </div>
+
+            <br><br>
+            <header class="major">
+                <h2 id="python-GS-other-poly">Golden Section Search on Other Polynomial Equations</h2>
+            </header>
+
+            <p>
+            The following functions is another polynomial functions that I picked to show 
+            that the Golden Section Search algorithm code is functioning correctly for higher order
+            polynomial equations. The points picked are 
+            from the assignment outline [(0,0), (-4,0), (-8,0), (2,0), and (6,0)] along
+            with the 4 additional points that I picked randomly from each of the 4 quadrants
+            of the x-y plane. 
+            <br>
+            For the fifth-order polynomial equation:
+                $$ y = x^5 - 2x + 2$$        
+            <br>
+            The following table and plots shows the shortest distance objective function applied to this polynomial function:
+            </p>
+            <table>
+                <tr>
+                    <th>$$x_{0}, y_{0}$$</th>
+                    <th>Initial Interval [a,b]</th>
+                    <th>Shortest Distance</th>
+                    <th>$$x_{final}$$</th>
+                    <th>Number of changes in interval</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(0, 0)</td>
+                    <td>[-5, 10]</td>
+                    <td>1.03868</td>
+                    <td>0.68750</td>
+                    <td>41</td>
+                </tr>
+                 <tr>
+                    <td style="text-align: center;">(-4, 0)</td>
+                    <td>[-5, 10]</td>
+                    <td>2.63017</td>
+                    <td>-1.37503</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-8, 0)</td>
+                    <td>[-5, 10]</td>
+                    <td>6.62262</td>
+                    <td>-1.38932</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(2, 0)</td>
+                    <td>[-5, 10]</td>
+                    <td>1.35438</td>
+                    <td>0.90607</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(6, 0)</td>
+                    <td>[-5, 10]</td>
+                    <td>5.08779</td>
+                    <td>1.05338</td>
+                    <td>41</td>
+                </tr>
+                <!--My points! :D-->
+                <tr>
+                    <td style="text-align: center;">(8.2, 5.7)</td>
+                    <td>[-5, 10]</td>
+                    <td>6.73314</td>
+                    <td>1.47406</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(3.4, -2.4)</td>
+                    <td>[-5, 10]</td>
+                    <td>4.04668</td>
+                    <td>0.86533</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-6.8, -4.1)</td>
+                    <td>[-5, 10]</td>
+                    <td>5.23730</td>
+                    <td>-1.56602</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-5.3,12.9)</td>
+                    <td>[-5, 10]</td>
+                    <td>10.62008</td>
+                    <td>-0.83777</td>
+                    <td>41</td>
+                </tr>
+            </table>
+            <br><br>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_IntSteps_0_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_Final_0_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_IntSteps_-4_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_Final_-4_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_IntSteps_-8_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_Final_-8_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_IntSteps_2_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_Final_2_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_IntSteps_6_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_Final_6_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_IntSteps_8.2_5.7.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_Final_8.2_5.7.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_IntSteps_3.4_-2.4.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_Final_3.4_-2.4.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_IntSteps_-6.8_-4.1.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_Final_-6.8_-4.1.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_IntSteps_-5.3_12.9.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Poly_Final_-5.3_12.9.png" alt="...">
+                </div>
+            </div>
+            <br>
+
+            </header>
+                <h3 id="python-GS-exp">Golden Section Search on Exponential Function</h3>
+            </header>
+            
+            <p>
+            The following table and plots shows the shortest distance objective function applied to an exponential function:
+                $$ y = 1.2^x + 7 $$          
+            <br>
+            For brevity, all of the following unique functions will only have up to 
+            five coordinates that will be plugged into the Newton-Raphson algorithm to yield distances.
+            <br><br>
+            The coordinates checked will be (2, 0), which is on the x-axis, and four coordinates spread
+            across the four quadrants of the x-y plane, which includes (8.2, 5.7), (3.4, -2.4), (-6.8, -4.1),
+            (-5.3, 12.9). 
+            <br>
+            </p>
+
+            <table>
+                <tr>
+                    <th>$$x_{0}, y_{0}$$</th>
+                    <th>Initial Interval [a,b]</th>
+                    <th>Shortest Distance</th>
+                    <th>$$x_{final}$$</th>
+                    <th>Number of changes in interval</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(2, 0)</td>
+                    <td>[-5, 10]</td>
+                    <td>8.23262</td>
+                    <td>0.41224</td>
+                    <td>41</td>
+                </tr>
+                <!--My points! :D-->
+                <tr>
+                    <td style="text-align: center;">(8.2, 5.7)</td>
+                    <td>[-5, 10]</td>
+                    <td>4.81656</td>
+                    <td>5.92215</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(3.4, -2.4)</td>
+                    <td>[-5, 10]</td>
+                    <td>10.86810</td>
+                    <td>1.05488</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-6.8, -4.1)</td>
+                    <td>[-10, 10]</td>
+                    <td>11.37513</td>
+                    <td>-7.34308</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-5.3, 12.9)</td>
+                    <td>[-10, 10]</td>
+                    <td>5.50527</td>
+                    <td>-4.88956</td>
+                    <td>41</td>
+                </tr>
+            </table>
+            <br> <br>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Exp_IntSteps_2_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Exp_Final_2_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Exp_IntSteps_8.2_5.7.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Exp_Final_8.2_5.7.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Exp_IntSteps_3.4_-2.4.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Exp_Final_3.4_-2.4.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Exp_IntSteps_-6.8_-4.1.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Exp_Final_-6.8_-4.1.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_IntSteps_-5.3_12.9.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Exp_Final_-5.3_12.9.png" alt="...">
+                </div>
+            </div>
+            <br>
+
+            </header>
+                <h3 id="python-GS-log">Golden Section Search on Logarithm Function</h3>
+            </header>
+
+            <p>
+            The following table and plots shows the shortest distance objective function applied to an logarithmic function:
+                $$ y = log_{3}(x) + 10 $$          
+            <br>
+            For logarithmic equations, the domain of acceptable x inputs is 0 to infinity. Thus, the points
+            chosen ensure that x > 0. 
+            <br> <br>
+            This is because although the objective function is indeed capable of evaluating x values that are 
+            less than 0, the Newton-Raphson algorithm would require a step from its initial guess (a positive number) and evaluate the 
+            functions at a negative number, which is a special case that would need to be handled differently.
+            <br> <br>
+            For demonstrating profiency of the standard Newton-Raphson algorithm, all points that are fed to the 
+            algorithm require the x0 value to be greater than 0.             
+            
+            <br> <br>
+            For example, instead of plugging in the usual (0,0) coordinate to get the distance of the point from the function, I chose to plug in (2,0).
+            Out of the 4 quadrants tested, only the positive-x side and positive-y side of the x-y plane are tested (1 quadrant) with the set of coordinates 
+            of [8.2, 5.7].
+            </p>
+
+            <table>
+                <tr>
+                    <th>$$x_{0}, y_{0}$$</th>
+                    <th>Initial Interval [a,b]</th>
+                    <th>Shortest Distance</th>
+                    <th>$$x_{final}$$</th>
+                    <th>Number of changes in interval</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(2, 0)</td>
+                    <td>[0.00001, 10]</td>
+                    <td>1.99998</td>
+                    <td>1.69349</td>
+                    <td>40</td>
+                </tr>
+                <!--My points! :D-->
+                <tr>
+                    <td style="text-align: center;">(8.2, 5.7)</td>
+                    <td>[0.00001, 10]</td>
+                    <td>6.17368</td>
+                    <td>7.45141</td>
+                    <td>40</td>
+                </tr>
+            </table>
+            <br> <br>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Log_IntSteps_2_0.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Log_Final_2_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Log_IntSteps_8.2_5.7.png" alt="...">
+                </div>
+
+               <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Log_Final_8.2_5.7.png" alt="...">
+                </div>
+            </div>
+            <br>
+
+            <header>
+            <h3 id="python-GS-rat">Golden Section Search on Rational Function</h3>
+            </header>
+
+            <p>
+            The following table and plots shows the shortest distance objective function applied to an rational function
+            where the variable x is found in the denominator:
+                $$ y = \frac{6}{x} $$
+            
+            <br>
+            In this rational function, the domain of x includes all real numbers EXCEPT for x = 0. 
+            <br> <br>
+            Thus, the points chosen for this application of the Newton-Raphson algorithm does not include (0,0),
+            but rather (2,0), along with the standard set of 4 points that are scattered in all 4 quadrants of the x-y plane.
+            </p>
+
+            <table>
+                <tr>
+                    <th>$$x_{0}, y_{0}$$</th>
+                    <th>Initial Interval [a,b]</th>
+                    <th>Shortest Distance</th>
+                    <th>$$x_{final}$$</th>
+                    <th>Number of changes in interval</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(2, 0)</td>
+                    <td>[-5, 10]</td>
+                    <td>2.22500</td>
+                    <td>3.15085</td>
+                    <td>41</td>
+                </tr>
+                <!--My points! :D-->
+                <tr>
+                    <td style="text-align: center;">(8.2, 5.7)</td>
+                    <td>[-5, 10]</td>
+                    <td>4.94612</td>
+                    <td>7.70230</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(3.4, -2.4)</td>
+                    <td>[-5, 10]</td>
+                    <td>3.89201</td>
+                    <td>4.50391</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-6.8, -4.1)</td>
+                    <td>[-10, 5]</td>
+                    <td>3.18698</td>
+                    <td>-6.32770</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-5.3, 12.9)</td>
+                    <td>[-10, 5]</td>
+                    <td>13.86178</td>
+                    <td>-6.98968</td>
+                    <td>41</td>
+                </tr>
+            </table>            
+            <br> <br>   
+            
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Rat_IntSteps_2_0.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Rat_Final_2_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Rat_IntSteps_8.2_5.7.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Rat_Final_8.2_5.7.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Rat_IntSteps_3.4_-2.4.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Rat_Final_3.4_-2.4.png" alt="...">
+                </div>
+            </div>
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Rat_IntSteps_-6.8_-4.1.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Rat_Final_-6.8_-4.1.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Rat_IntSteps_-5.3_12.9.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Rat_Final_-5.3_12.9.png" alt="...">
+                </div>
+            </div>
+            <br><br>
+
+            </header>
+            <h3 id="python-GS-root">Golden Section Search on Radical Root Function</h3>
+            </header>
+
+            <p>
+            The following table and plots shows the shortest distance objective function applied to an logarithmic function:
+                $$ y = \sqrt[3]{x} $$
+            
+            <br>
+            The domain of x values ranges from negative infinity to infinity, so any set of coordinate points 
+            may be fed into the Newton-Raphson code. In order to display a meaningful distance, the first
+            set of coordinate points will be (2, 0) instead of (0, 0), since (0, 0) is directly on the 
+            cubic equation.
+            </p>
+
+            <table>
+                <tr>
+                    <th>$$x_{0}, y_{0}$$</th>
+                    <th>Initial Interval [a,b]</th>
+                    <th>Shortest Distance</th>
+                    <th>$$x_{final}$$</th>
+                    <th>Number of changes in interval</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(2, 0)</td>
+                    <td>[-5, 10]</td>
+                    <td>1.23043</td>
+                    <td>1.72189</td>
+                    <td>41</td>
+                </tr>
+                <!--My points! :D-->
+                <tr>
+                    <td style="text-align: center;">(8.2, 5.7)</td>
+                    <td>[-5, 10]</td>
+                    <td>3.67144</td>
+                    <td>8.49306</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(3.4, -2.4)</td>
+                    <td>[-5, 10]</td>
+                    <td>3.85619</td>
+                    <td>2.75517</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-6.8, -4.1)</td>
+                    <td>[-10, 5]</td>
+                    <td>2.19619</td>
+                    <td>-6.99924</td>
+                    <td>41</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">(-5.3, 12.9)</td>
+                    <td>[-10, 5]</td>
+                    <td>13.42247</td>
+                    <td>0.56788</td>
+                    <td>41</td>
+                </tr>
+            </table>
+            <br> <br>   
+            
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Root_IntSteps_2_0.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Root_Final_2_0.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Root_IntSteps_8.2_5.7.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Root_Final_8.2_5.7.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Root_IntSteps_3.4_-2.4.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Root_Final_3.4_-2.4.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Root_IntSteps_-6.8_-4.1.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Root_Final_-6.8_-4.1.png" alt="...">
+                </div>
+            </div>
+
+            <div class="row plot-grid">
+                <!-- left side of column-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Root_IntSteps_-5.3_12.9.png" alt="...">
+                </div>
+
+                <!--right side of colunm-->
+                <div class="col-6">
+                    <img src="../assignment1/Plot_GS_Root_Final_-5.3_12.9.png" alt="...">
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <!-- Footer -->
+    <!-- <footer id="footer">
+        <div class="inner">
+            <ul class="actions">
+                <li>
+                    <a href="index.html" class="button">Back to Home</a>
+                </li>
+            </ul>
+
+            <p>Mechatronics Engineering · University of Waterloo</p>
+        </div>
+    </footer> -->
+
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.poptrox.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>
