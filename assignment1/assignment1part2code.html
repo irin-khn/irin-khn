@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Assignment 1 - Optimization</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <link rel="stylesheet" href="../assets/css/assignment.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <h1>Assignment 1 Part 2: Code </h1>
+            <nav>
+                <a href="../index.html">Home</a>
+                <a href="../assignment1/assignment1part1report.html">Part 1 Report</a>
+                <a href="../assignment1/assignment1part1code.html">Part 1 Python Code</a>
+                <a href="../assignment1/assignment1part2report.html">Part 2 Report</a>
+                <a href="../assignment1/assignment1part2code.html">Part 2 Python Code</a>
+            </nav>
+        </div>
+        </header>
+
+    <div id="main">
+        <section id="overview">
+            <h5>By Irina Khan, September 28, 2026</h5>
+            <h2> Table of Contents</h2>
+            <ul>
+                <li> <a href="#python-code-line-fitting">Line-fitting Code </a></li>
+                <li> <a href="#python-code-parabola-fitting">Parabola-fitting Code </a></li>
+            </ul>
+            <p>
+                <strong>NOTE: The regular Newton-Raphson multivariate algorithm was used for Part 2 INSTEAD of 'optimizing for each parameter
+                individually in each iteration step'. This is due to the professor clarifying that we should use the original Newton-Raphson multivariate 
+                algorithm in class on Monday, September 28, 2026. </strong>
+            </p>
+        </section>
+        
+        <section id="main code">
+            <header class="major">
+                <h2>Newton-Raphson Multivariate Python Script - Line Fitting</h2>
+            </header>
+
+            <p>
+                Code is displayed using the fetch function (Javascript) on the python script posted on the git repo: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch 
+            </p>
+
+            <pre id="python-code-line-fitting"> </pre>
+
+            <script>
+            fetch("A1P1NewtonRaphson.py")
+                .then(response => response.text())
+                .then(code => {
+                    document.getElementById("python-code").textContent = code;
+                });
+            </script>
+        </section>
+    
+        <section id="main code">
+            <header class="major">
+                <h2>Newton-Raphson Multivariate Python Script - Parabola Fitting</h2>
+            </header>
+
+            <p>
+                Code is displayed using the fetch function (Javascript) on the python script posted on the git repo: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch 
+            </p>
+
+            <pre id="python-code-parabola-fitting"> </pre>
+
+            <script>
+            fetch("A1P2NewtonRaphsonMVParabola.py")
+                .then(response => response.text())
+                .then(code => {
+                    document.getElementById("python-code").textContent = code;
+                });
+            </script>
+        </section>

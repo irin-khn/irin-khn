@@ -89,7 +89,7 @@ plt.plot(x_vals, y_vals, label=f"f(x) = $x^2 + 5$", color="blue", linewidth=1)
 
 # --- Ploting point x0 and y0: ---
 plt.scatter(x0, y0, color="purple", s=30, zorder=3, label=rf"$x_0,\ y_0$ = ({x0:.2f}, {y0:.2f})")
-# --- End of Ploting point x0 and y0: ---
+# --- End of Ploting point x0 and y0 ---
 
 
 # --- Ploting all intermediate x and y values from numerical method, in colour order from red to green: ---
