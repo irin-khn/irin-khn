@@ -55,7 +55,7 @@
             fetch("A1P1NewtonRaphson.py")
                 .then(response => response.text())
                 .then(code => {
-                    document.getElementById("python-code").textContent = code;
+                    document.getElementById("python-code-NR").textContent = code;
                 });
             </script>
         </section>
@@ -164,13 +164,13 @@ def ddf(x):
             <p>
                 Code is displayed using the fetch function (Javascript) on the python script posted on the git repo: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch 
             </p>
-            <pre id="python-code"> </pre>
+            <pre id="python-code-GS"> </pre>
 
             <script>
             fetch("A1P1GoldenSectionSearch.py")
                 .then(response => response.text())
                 .then(code => {
-                    document.getElementById("python-code").textContent = code;
+                    document.getElementById("python-code-GS").textContent = code;
                 });
             </script>
         </section>
