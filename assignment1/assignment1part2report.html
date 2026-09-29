@@ -221,7 +221,7 @@
 
                 Here, N is the number of points in the dataset [(x1, y1), ..., (xn, yn)]. For the equation format of y = ax^2 + bx + c, 
                 the MSE equation can be written as:
-                    $$ J(m,b) = \frac{1}{N} \sum_{i=1}^{N} (y_i - (a \cdot x_i^2 + b \cdot c_i + c))^2 $$
+                    $$ J(m,b) = \frac{1}{N} \sum_{i=1}^{N} (y_i - (a \cdot x_i^2 + b \cdot x_i + c))^2 $$
                 
                 Since the objective function is, once again, only a quadratic equation, and the equation of the Newton-Raphson Multivariate requires
                 the gradient of the objective function and the Hessian (which is a second derivative operation), the Hessian is a constant value.
